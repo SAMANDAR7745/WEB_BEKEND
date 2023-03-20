@@ -11,36 +11,6 @@ import django_filters
 from rest_framework import filters
 from django.shortcuts import render
 
-#
-# class CategoryCreateListView(APIView):
-#     def get(self, request: Request):
-#         products = Category.objects.all().order_by('-id')
-#         serializer = CategorySerializer(products, many=True)
-#         return Response(data={"category": serializer.data})
-#
-#
-# class CategoryRetrieveUpdateDestroyAPIView(APIView):
-#     permission_classes = (IsAdminUser,)
-#
-#     def get(self, request, pk):
-#         product = get_object_or_404(Category, pk=pk)
-#         serializer = CategorySerializer(product)
-#         return Response(data=serializer.data)
-#
-#     def put(self, request, pk):
-#         product = get_object_or_404(Category, pk=pk)
-#         data = request.data
-#         serializer = CategorySerializer(instance=product, data=data, partial=True)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(data=serializer.data)
-#         else:
-#             return Response(data=serializer.errors)
-#
-#     def delete(self, request, pk):
-#         Category.objects.filter(id=pk).delete()
-#         return Response(data={}, status=status.HTTP_204_NO_CONTENT)
-
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
@@ -115,19 +85,9 @@ class ClientCreateListView(ListCreateAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['full_name']
 
-    # def get_queryset(self):
-    #     queryset = Client.objects.all()
-    #     name = self.request.query_params.get('name')
-    #     if name is not None:
-    #         return Client.objects.filter(full_name__icontains=name)
-    #     return queryset
-
 
 class ClientRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAdminUser,)
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
     location_field = 'pk'
-
-
-

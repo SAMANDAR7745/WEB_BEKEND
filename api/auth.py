@@ -51,13 +51,6 @@ class UserViewSet(viewsets.ModelViewSet):  # ViewSet
         serailizer.save()
         return Response({}, status=status.HTTP_201_CREATED)
 
-    # def get_permissions(self):
-    #     if self.action == "list":
-    #         permission_classes = [IsAuthenticated]
-    #     else:
-    #         permission_classes = [IsAdminUser]
-    #     return [permission() for permission in permission_classes]
-
     @action(detail=True, methods=["post"],permission_classes=[IsAdminOrIsSelf])
     def set_password(self, request, pk):
         user = self.get_object()
@@ -85,33 +78,3 @@ class UserViewSet(viewsets.ModelViewSet):  # ViewSet
 
 
 
-
-
-
-
-# def list(self, request):
-#     users = User.objects.all()
-#     serializers = UserSerializer(users, many=True)
-#     return Response(serializers.data)
-#
-# def retrieve(self, request, pk):
-#     user = get_object_or_404(User, pk=pk)
-#     serializer = UserSerializer(instance=user)
-#     return Response(serializer.data)
-#
-# def update(self, request, pk):
-#     user = get_object_or_404(User, pk=pk)
-#     serializer = UserSerializer(instance=user, data=request.data, partial=True)
-#     serializer.is_valid(raise_exception=True)
-#     serializer.save()
-#     return Response(serializer.data)
-#
-# def destroy(self, request, pk):
-#     user = get_object_or_404(User, pk=pk)
-#     user.delete()
-#     return Response({}, status=status.HTTP_204_NO_CONTENT)
-#
-# def create(self, request):
-#     serializer = RegisterSerializer(data=request.data)
-#     serializer.is_valid(raise_exception=True)
-#     return Response({}, status=status.HTTP_201_CREATED)

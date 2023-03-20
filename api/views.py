@@ -54,9 +54,6 @@ class OrderCreateListView(ListCreateAPIView):
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
     filterset_fields = ["is_paid", 'shipping', "client"]
 
-    # def get_queryset(self):
-    #     return Order.objects.filter(is_paid=False)
-
 
 class OrderRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAdminUser,)
